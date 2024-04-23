@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.DeleteResponse;
 import com.example.demo.dto.InventoryResponse;
 import com.example.demo.service.InventoryService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,13 @@ public class InventoryController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<InventoryResponse> isInStock(@RequestParam List<String> skuCode) {
+    public List<InventoryResponse> isInStock(List<String> skuCode) {
         return inventoryService.isInStock(skuCode);
+    }
+
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<DeleteResponse> deleteItems(@RequestParam List<String> skuCode, @RequestParam List<Integer> quantity) {
+        return inventoryService.deleteItems(skuCode, quantity);
     }
 }
